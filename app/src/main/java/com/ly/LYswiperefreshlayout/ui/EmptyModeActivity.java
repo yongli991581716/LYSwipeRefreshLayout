@@ -7,7 +7,6 @@ import android.view.View;
 
 import com.ly.LYswiperefreshlayout.R;
 import com.ly.LYswiperefreshlayout.view.LYAdapter;
-import com.ly.library.view.DividerItemDecoration;
 import com.ly.library.view.LYSwipeRefreshLayout;
 import com.ly.library.view.footer.DefaultFooterView;
 
@@ -61,7 +60,7 @@ public class EmptyModeActivity extends AppCompatActivity {
         mAdapter = new LYAdapter(this);
         mAdapter.setCount(0);
         mLYSwipeRefreshLayout.setAdapter(mAdapter);
-        mLYSwipeRefreshLayout.setOnLoadingComplete(true);
+        mLYSwipeRefreshLayout.setOnRefreshUpComplete(true);
     }
 
 

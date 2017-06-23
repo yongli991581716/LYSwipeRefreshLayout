@@ -7,6 +7,7 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.RecyclerView;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewTreeObserver;
 import android.widget.RelativeLayout;
@@ -160,7 +161,6 @@ public class LYSwipeRefreshLayout extends SwipeRefreshLayout {
             @Override
             public void onRefresh() {
                 if (mOnRefreshListener != null) {
-                    isLoading = true;
                     mOnRefreshListener.onRefresh();
                 } else {
                     LYSwipeRefreshLayout.this.setOnRefreshComplete();
@@ -362,26 +362,20 @@ public class LYSwipeRefreshLayout extends SwipeRefreshLayout {
     /**
      * 加载完成,默认没有更多加载
      */
-    public void setOnLoadingComplete() {
-        if (mMode == Mode.NORAML.value) {
-            //完成刷新动作
-            setOnRefreshComplete();
-        } else if (mMode == Mode.LIST.value) {
-            setOnLoadingComplete(false);
-        } else {
-            //预留
-        }
-
+    public void setOnRefreshUpComplete() {
+        //完成刷新动作
+        setOnRefreshComplete();
     }
 
     /**
-     * 列表模式加载完成
+     * 加载完成,默认没有更多加载
      */
-    public void setOnLoadingComplete(boolean hasMore) {
+    public void setOnRefreshUpComplete(boolean hasMore) {
         //完成刷新动作
         setOnRefreshComplete();
-        //完成更多加载动作
-        onFinishLoading(hasMore);
+
+        //设置是否有更多
+        setHasMore(hasMore);
     }
 
     /**
@@ -389,8 +383,6 @@ public class LYSwipeRefreshLayout extends SwipeRefreshLayout {
      */
     private void setOnRefreshComplete() {
         this.setRefreshing(false);
-        //标记加载结束
-        isLoading = false;
         //标记已经加载过
         if (!isFirstLoadingOver()) {
             setTag(this.getId(), true);
@@ -415,16 +407,16 @@ public class LYSwipeRefreshLayout extends SwipeRefreshLayout {
      *
      * @param hasMore
      */
-    private void onFinishLoading(boolean hasMore) {
+    public void setOnRefreshDownComplete(boolean hasMore) {
 
         if (getLayoutManager() == null) {
             return;
         }
 
-        if (!hasMore && mFooterDecoration != null) {
-            //如果没有更多，则偏移距离减去FooterDecoration的高度
-            mScrollY -= mFooterDecoration.getHeight();
-        }
+        //if (!hasMore && mFooterDecoration != null) {
+        //    //如果没有更多，则偏移距离减去FooterDecoration的高度
+        //    mScrollY -= mFooterDecoration.getHeight();
+        //}
 
         // 如果item不够页面item 个数，不显示footer
         if (getLayoutManager().getItemCount() < mPageSize) {
@@ -492,6 +484,7 @@ public class LYSwipeRefreshLayout extends SwipeRefreshLayout {
         this.mOnScrollListener = onScrollListener;
     }
 
+
     /**
      * 滚动监听
      */
@@ -527,15 +520,16 @@ public class LYSwipeRefreshLayout extends SwipeRefreshLayout {
                 }
             }
 
-            if (mIsSwipeEnable) {
-                //此bug借鉴其他开发者
-                if (LYRecyclerViewUtil.findFirstCompletelyVisibleItemPosition(getLayoutManager()) != 0) {
-                    //此处需要特殊处理，因当item过大，首个完全显示item显示不完全，刷新回无效
-                    LYSwipeRefreshLayout.this.setEnabled(false);
-                } else {
-                    LYSwipeRefreshLayout.this.setEnabled(true);
-                }
-            }
+//            if (mIsSwipeEnable) {
+//                //解决RecyclerView和SwipeRefreshLayout共用存在的bug
+//                int position = LYRecyclerViewUtil.findFirstCompletelyVisibleItemPosition(getLayoutManager());
+//                if ( position!= 0) {
+//                    //此处需要特殊处理，因当item过大，首个完全显示item显示不完全，刷新回无效
+//                    LYSwipeRefreshLayout.this.setEnabled(false);
+//                } else {
+//                    LYSwipeRefreshLayout.this.setEnabled(true);
+//                }
+//            }
             int firstVisibleItem, visibleItemCount, totalItemCount, lastVisibleItem;
             visibleItemCount = getLayoutManager().getChildCount();
             totalItemCount = getLayoutManager().getItemCount();

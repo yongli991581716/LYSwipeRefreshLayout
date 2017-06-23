@@ -70,4 +70,22 @@ public class LYRecyclerViewUtil {
     }
 
 
+    /**
+     * 最后一个可见位置(即使部份可见)
+     *
+     * @param layoutManager
+     * @return
+     */
+    public static int findLastCompletelyVisibleItemPosition(RecyclerView.LayoutManager layoutManager) {
+        if (layoutManager != null) {
+            if (layoutManager instanceof LinearLayoutManager) {
+                return ((LinearLayoutManager) layoutManager).findLastCompletelyVisibleItemPosition();
+            } else if (layoutManager instanceof GridLayoutManager) {
+                return ((GridLayoutManager) layoutManager).findLastCompletelyVisibleItemPosition();
+            }
+        }
+
+
+        return RecyclerView.NO_POSITION;
+    }
 }
