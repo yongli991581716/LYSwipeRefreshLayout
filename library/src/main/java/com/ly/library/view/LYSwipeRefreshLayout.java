@@ -382,6 +382,14 @@ public class LYSwipeRefreshLayout extends SwipeRefreshLayout {
      * 完成刷新
      */
     private void setOnRefreshComplete() {
+
+        int lastVisibleItem = LYRecyclerViewUtil.findLastVisibleItemPosition(getLayoutManager());
+        if(mRecyclerView.getAdapter().getItemCount()<lastVisibleItem){
+            mScrollY=0;
+            //headerview滚动
+            scrollYHeaderView();
+        }
+
         this.setRefreshing(false);
         //标记已经加载过
         if (!isFirstLoadingOver()) {
@@ -510,14 +518,10 @@ public class LYSwipeRefreshLayout extends SwipeRefreshLayout {
             //记录滑动y轴距离
             mScrollY += dy;
             //RecyclerView滚动时，同步移动HeaderView的位置,以实现同步滚动
+
             if (mHeaderView != null) {
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
-                    //3.0（11）系统及以上 执行此程序片段，该库支持api等级大于等于14的运行环境，故会进入此片段
-                    mHeaderView.setTranslationY(-mScrollY);
-                } else {
-                    //3.0系统一下 执行此程序片段（若修改build，支持3.0以下，则执行此程序片段）
-                    ViewHelper.setTranslationY(mHeaderView, -mScrollY);
-                }
+                //headerview滚动
+                scrollYHeaderView();
             }
 
 //            if (mIsSwipeEnable) {
@@ -553,6 +557,19 @@ public class LYSwipeRefreshLayout extends SwipeRefreshLayout {
                 mOnScrollListener.onScrolled(recyclerView, dx, dy);
                 mOnScrollListener.onScroll(recyclerView, firstVisibleItem, visibleItemCount, totalItemCount);
             }
+        }
+    }
+
+    /**
+     * headerview滚动
+     */
+    private void scrollYHeaderView() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
+            //3.0（11）系统及以上 执行此程序片段，该库支持api等级大于等于14的运行环境，故会进入此片段
+            mHeaderView.setTranslationY(-mScrollY);
+        } else {
+            //3.0系统一下 执行此程序片段（若修改build，支持3.0以下，则执行此程序片段）
+            ViewHelper.setTranslationY(mHeaderView, -mScrollY);
         }
     }
 
