@@ -18,6 +18,11 @@
         android:onClick="listClick"
         android:text="列表模式" />
 
+    <TextView
+        style="@style/text_nomal_style"
+        android:layout_marginTop="@dimen/normal_size"
+        android:onClick="listEmptyClick"
+        android:text="列表模式空视图" />
 
     <TextView
         style="@style/text_nomal_style"

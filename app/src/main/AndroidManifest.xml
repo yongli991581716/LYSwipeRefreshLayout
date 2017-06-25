@@ -19,7 +19,7 @@
         </activity>
         <activity android:name=".ui.ListModeActivity" />
         <activity android:name=".ui.EmptyModeActivity" />
-
+        <activity android:name=".ui.NoramlModeActivity" />
     </application>
 
 </manifest>

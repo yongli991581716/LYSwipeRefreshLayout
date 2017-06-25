@@ -28,7 +28,7 @@ public class MainActivity extends AppCompatActivity {
      * @param view
      */
     public void normalClick(View view) {
-        startActivity(new Intent(this, EmptyModeActivity.class));
+        startActivity(new Intent(this, NoramlModeActivity.class));
     }
 
     /**
@@ -39,4 +39,15 @@ public class MainActivity extends AppCompatActivity {
     public void listClick(View view) {
         startActivity(new Intent(this, ListModeActivity.class));
     }
+
+    /**
+     * 列表空视图模式
+     *
+     * @param view
+     */
+    public void listEmptyClick(View view) {
+        startActivity(new Intent(this, EmptyModeActivity.class));
+    }
+
+
 }

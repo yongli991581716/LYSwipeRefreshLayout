@@ -146,10 +146,8 @@ public class LYSwipeRefreshLayout extends SwipeRefreshLayout {
         } else if (mMode == Mode.LIST.value) {
             //列表模式
             initListModeView(context);
-        } else if (mMode == Mode.NORAML_EXTEND.value) {
-            //普通可伸缩模式
-        } else if (mMode == Mode.LIST_EXTEND.value) {
-            //列表可伸缩模式
+        } else{
+            //预留
         }
     }
 
@@ -360,7 +358,7 @@ public class LYSwipeRefreshLayout extends SwipeRefreshLayout {
     }
 
     /**
-     * 加载完成,默认没有更多加载
+     * 加载完成,默认没有更多加载（普通模式）
      */
     public void setOnRefreshUpComplete() {
         //完成刷新动作
@@ -368,14 +366,22 @@ public class LYSwipeRefreshLayout extends SwipeRefreshLayout {
     }
 
     /**
-     * 加载完成,默认没有更多加载
+     * 加载完成,默认没有更多加载（列表模式）
      */
     public void setOnRefreshUpComplete(boolean hasMore) {
         //完成刷新动作
         setOnRefreshComplete();
 
-        //设置是否有更多
-        setHasMore(hasMore);
+        if (mMode == Mode.NORAML.value) {
+            //普通模式
+        } else if (mMode == Mode.LIST.value) {
+            //列表模式
+
+            //设置是否有更多
+            setHasMore(hasMore);
+        }else{
+            //预留
+        }
     }
 
     /**
@@ -383,18 +389,29 @@ public class LYSwipeRefreshLayout extends SwipeRefreshLayout {
      */
     private void setOnRefreshComplete() {
 
-        int lastVisibleItem = LYRecyclerViewUtil.findLastVisibleItemPosition(getLayoutManager());
-        if(mRecyclerView.getAdapter().getItemCount()<lastVisibleItem){
-            mScrollY=0;
-            //headerview滚动
-            scrollYHeaderView();
+        if (mMode == Mode.NORAML.value) {
+            //普通模式
+        } else if (mMode == Mode.LIST.value) {
+            //列表模式
+
+            int lastVisibleItem = LYRecyclerViewUtil.findLastVisibleItemPosition(getLayoutManager());
+            if (mRecyclerView.getAdapter().getItemCount() < lastVisibleItem) {
+                mScrollY = 0;
+                //headerview滚动
+                scrollYHeaderView();
+            }
+
+            //标记已经加载过
+            if (!isFirstLoadingOver()) {
+                setTag(this.getId(), true);
+            }
+        } else {
+            //预留
         }
 
+
+        //公共部分
         this.setRefreshing(false);
-        //标记已经加载过
-        if (!isFirstLoadingOver()) {
-            setTag(this.getId(), true);
-        }
     }
 
     /**
