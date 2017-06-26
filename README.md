@@ -1,26 +1,26 @@
-#LYSwipeRefreshLayout
+# LYSwipeRefreshLayout
 
 
 
-##What
+## What
 This is a project on the swipeRefreshlayout package.
 
-###show
+### show
 
 ![](https://raw.githubusercontent.com/yongli991581716/LYSwipeRefreshLayout/master/pic/1.gif)
 
-##why
+## why
 1. The author needs a simple and satisfying drop-down control for the project.
 2. Support google original refresh control.
 
-##where&when
+## where&when
 1. We can use it in project development.
 2. The project contains or not contains a refresh feature.
 3. ...
 
-##how
+## how
 
-###Requirements
+### Requirements
 Min SDK version 16
 
 Installing with Gradle
@@ -42,7 +42,7 @@ In your app level build.gradle
 compile 'com.github.yongli991581716:LYSwipeRefreshLayout:1.1'
 ```
 
-###usage
+### usage
 
 In xml
 
@@ -59,9 +59,9 @@ app:mode="list">
 
 detail see sample(app)
 
-##who
+## who
 
-###Developed By
+### Developed By
 Mr.Li
 
 ## License
