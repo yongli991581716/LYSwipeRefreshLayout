@@ -39,7 +39,7 @@ maven { url 'https://jitpack.io' }
 In your app level build.gradle
 
 ```
-compile 'com.github.yongli991581716:LYSwipeRefreshLayout:1.1'
+compile 'com.github.yongli991581716:LYSwipeRefreshLayout:1.2'
 ```
 
 ### usage
