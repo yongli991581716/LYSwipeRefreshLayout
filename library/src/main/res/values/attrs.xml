@@ -2,7 +2,7 @@
 <resources>
 
     <declare-styleable name="LYSwipeRefreshLayout">
-        <attr name="mode">
+        <attr name="content_mode">
             <enum name="normal" value="0"/>
             <enum name="list" value="1"/>
             <enum name="noraml_extend" value="2"/>

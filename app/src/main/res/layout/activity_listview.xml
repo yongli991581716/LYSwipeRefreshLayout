@@ -8,7 +8,7 @@
         android:id="@+id/swipeRefreshLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:mode="list">
+        app:content_mode="list">
 
     </com.ly.library.view.LYSwipeRefreshLayout>
 </RelativeLayout>

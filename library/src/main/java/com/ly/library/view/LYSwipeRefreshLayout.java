@@ -130,7 +130,7 @@ public class LYSwipeRefreshLayout extends SwipeRefreshLayout {
      */
     private void initData(Context context, AttributeSet attrs) {
         TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.LYSwipeRefreshLayout);
-        mMode = typedArray.getInt(R.styleable.LYSwipeRefreshLayout_mode, Mode.LIST.value);
+        mMode = typedArray.getInt(R.styleable.LYSwipeRefreshLayout_content_mode, Mode.LIST.value);
     }
 
     /**

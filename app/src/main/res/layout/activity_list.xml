@@ -4,6 +4,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    app:mode="list">
+    app:content_mode="list">
 
 </com.ly.library.view.LYSwipeRefreshLayout>
