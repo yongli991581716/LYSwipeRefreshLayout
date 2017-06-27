@@ -21,7 +21,7 @@ This is a project on the swipeRefreshlayout package.
 ## how
 
 ### Requirements
-Min SDK version 16
+Min SDK version 14
 
 Installing with Gradle
 
